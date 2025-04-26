@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ba06cd7-510e-48ad-87ef-b3ea77a20487" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Progetti.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/Board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/Cephalopod.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/Game.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/Montecarlo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/Node.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/TicTacToe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/algoritmi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cephalopod/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/progetto/progettoCicconeMurfuniVoci.py" afterDir="false" />
+    <list default="true" id="4ba06cd7-510e-48ad-87ef-b3ea77a20487" name="Changes" comment="primo commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +22,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Gory-git&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gory-git/progettoAI&quot;,
+    &quot;accountId&quot;: &quot;f3371dc8-104d-4965-9088-498ae9c5eef2&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -90,8 +88,19 @@
       <workItem from="1743243198210" duration="3570000" />
       <workItem from="1743247411275" duration="1671000" />
       <workItem from="1743267706756" duration="350000" />
-      <workItem from="1743415684703" duration="2503000" />
+      <workItem from="1743415684703" duration="3014000" />
+      <workItem from="1743931036716" duration="2126000" />
+      <workItem from="1743943486595" duration="1000" />
     </task>
+    <task id="LOCAL-00001" summary="primo commit">
+      <option name="closed" value="true" />
+      <created>1743437353277</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1743437353277</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +116,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="primo commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="primo commit" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Progetti$progettoCicconeMurfuniVoci.coverage" NAME="progettoCicconeMurfuniVoci Coverage Results" MODIFIED="1743436811379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/progetto" />
