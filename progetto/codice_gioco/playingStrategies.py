@@ -237,30 +237,15 @@ def evaluate_position(row, col, board, player):
         score += 2  # Punteggio alto per gli angoli
     if row in [0, 4] or col in [0, 4]:
         score += 1  # Punteggio per le posizioni ai bordi
-    somma_nemici = 0
+    if board.board[row][col] != None and board.board[row][col][1] == 6:
+        score += 3
+
     vicini = neighbors(row, col, board)
 
-    # for (r1, c1) in vicini:
-    #     d1 = board.board[r1][c1]
-    #     if d1 != None:
-    #         for (r2, c2) in vicini:
-    #             d2 = board.board[r2][c2]
-    #             if d2 != None:
-    #                 if d1[0] != player and d2[0] != player and d1[1] + d2[1] > somma_nemici and d1[1] + d2[1] < 7:
-    #                     somma_nemici = d1[1] + d2[1]
-    # score += somma_nemici
-    punti = 0
     for (r, c) in vicini:
         if board.board[r][c] is not None:
-
-            punti += board.board[r][c][1] if board.board[r][c][1] < 6 else 0
             if board.board[r][c][1] == 6:
-                punti += 1
-
-            if board.board[r][c][0] == player:
-                score += punti
-            else:
-                score -= punti
+                score += 1
 
     return score
 
