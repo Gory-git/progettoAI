@@ -218,9 +218,9 @@ def h(board, player):
     for row in range(5):
         for col in range(5):
             # print("\n", board.board[row][col])
-            if board.board[row][col] != None and board.board[row][col][0] == player:
+            if board.board[row][col] is not None and board.board[row][col][0] == player:
                 score += evaluate_position(row, col, board, player)  # Valuta la posizione dell'unità del giocatore
-            elif board.board[row][col] != None and board.board[row][col][0] != player:
+            elif board.board[row][col] is not None and board.board[row][col][0] != player:
                 score -= evaluate_position(row, col, board, avversario)  # Penalizza la posizione dell'unità dell'avversario
     '''
     
@@ -237,7 +237,7 @@ def evaluate_position(row, col, board, player):
         score += 2  # Punteggio alto per gli angoli
     if row in [0, 4] or col in [0, 4]:
         score += 1  # Punteggio per le posizioni ai bordi
-    if board.board[row][col] != None and board.board[row][col][1] == 6:
+    if board.board[row][col][1] == 6:
         score += 3
 
     vicini = neighbors(row, col, board)
