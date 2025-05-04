@@ -15,7 +15,7 @@ def playerStrategy (game,state):
 
     if occupate >= 6:
         cutOff = 4
-    if occupate >= 16:
+    if occupate >= 17:
         cutOff = 5
     if occupate >= 20:
         cutOff = 6
@@ -24,10 +24,10 @@ def playerStrategy (game,state):
     if occupate >= 23:
         cutOff = 8
 
-    print(f"\n cutoff: {cutOff}, occupate: {occupate}")
+    # print(f"\n cutoff: {cutOff}, occupate: {occupate}")
 
     # The player uses the alphabeta search algorithm to find the best move.
-    value,move = playingStrategies.h_alphabeta_search(game,state,playingStrategies.cutoff_depth(cutOff))
+    value,move = playingStrategies.h_alphabeta_search(game,state,playingStrategies.cutoff_depth(cutOff), playingStrategies.h)
   
     return move
 
