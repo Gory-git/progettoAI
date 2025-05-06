@@ -213,7 +213,7 @@ def h(game, board, player):
     player_territory = board.count(player)
     opponent_territory = sum(1 for row in board.board for cell in row if cell != player)
 
-    score += player_territory - opponent_territory  # Controllo del territorio
+    score += 3.5 * (player_territory - opponent_territory) # Controllo del territorio
 
     for row in range(5):
         for col in range(5):
@@ -221,11 +221,10 @@ def h(game, board, player):
             if board.board[row][col] is not None:
                 if board.board[row][col][0] == player:
                     score += evaluate_position(row, col, board, player)  # Valuta la posizione dell'unità del giocatore
-                elif board.board[row][col][0] != player:
-                    score -= evaluate_position(row, col, board, avversario)  # Penalizza la posizione dell'unità dell'avversario
-                else:
-                    score += evaluate_empty_position(row, col, board, player)
-                    score -= evaluate_empty_position(row, col, board, avversario)
+                if board.board[row][col][0] != player:
+                    score -= evaluate_position(row, col, board, avversario) # Penalizza la posizione dell'unità dell'avversario
+            # else:
+            #     score -= evaluate_empty_position(row, col, board, player)
     '''
     
     '''
@@ -234,95 +233,133 @@ def h(game, board, player):
 
 def evaluate_empty_position(row, col, board, player):
     vicini = neighbors(row, col, board)
-    vicini_nemici = []
+    # vicini_nemici = []
     score = 0
-    for (r, c) in vicini:
-        if board.board[r][c] is not None:
-            if board.board[r][c][0] != player:
-                vicini_nemici.append((r, c))
+    # for (r, c) in vicini:
+    #     if board.board[r][c] is not None:
+    #         if board.board[r][c][0] != player:
+    #             vicini_nemici.append((r, c))
     if len(vicini) == 1:
         return 0
+
     if len(vicini) == 2:
         (r1, c1) = vicini[0]
         (r2, c2) = vicini[1]
-        score += board.board[r1][c1][1] + board.board[r2][c2][1]
-        score += 2 if score == 6 else 0
+        somma = board.board[r1][c1][1] + board.board[r2][c2][1]
+        score -= 1 if somma == 6 else 0
+
     if len(vicini) == 3:
         (r1, c1) = vicini[0]
         (r2, c2) = vicini[1]
         (r3, c3) = vicini[2]
 
-        score1 = board.board[r1][c1][1] + board.board[r2][c2][1]
-        score1 = score1 if score1 <= 6 else 0
-        score1 += 2 if score1 == 6 else 0
+        somma1 = board.board[r1][c1][1] + board.board[r2][c2][1]
+        somma2 = board.board[r3][c3][1] + board.board[r1][c1][1]
+        somma3 = board.board[r3][c3][1] + board.board[r2][c2][1]
+        somma4 = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r3][c3][1]
 
-        score2 = board.board[r2][c2][1] + board.board[r3][c3][1]
-        score2 = score2 if score2 <= 6 else 0
-        score2 += 2 if score2 == 6 else 0
+        score -= 1 if somma1 == 6 else 0
+        score -= 1 if somma2 == 6 else 0
+        score -= 1 if somma3 == 6 else 0
+        score -= 1 if somma4 == 6 else 0
 
-        score3 = board.board[r1][c1][1] + board.board[r3][c3][1]
-        score3 = score3 if score3 <= 6 else 0
-        score3 += 2 if score3 == 6 else 0
-
-        score4 = board.board[r1][c1][1] + board.board[r1][c2][1] + board.board[r3][c3][1]
-        score4 = score4 if score4 <= 6 else 0
-        score4 += 2 if score4 == 6 else 0
-
-        score += max(score1, score2, score3, score4)
 
     if len(vicini) == 4:
-        scores = []
-        for (r1, c1), (r2, c2) in vicini:
-            if (r1, c1) != (r2, c2):
-                s = board.board[r1][c1][1] + board.board[r2][c2][1]
-                s = s if s <= 6 else 0
-                s += 2 if s == 6 else 0
-                scores.append(s)
-        score += max(scores)
-        scores = []
-        for (r1, c1), (r2, c2), (r3, c3) in vicini:
-            if (r1, c1) != (r2, c2) and (r1, c1) != (r3, c3) and (r2, c2) != (r3, c3):
-                s = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r3][c3][1]
-                s = s if s <= 6 else 0
-                s += 2 if score == 6 else 0
-                scores.append(s)
-        score += max(scores)
-
         (r1, c1) = vicini[0]
         (r2, c2) = vicini[1]
         (r3, c3) = vicini[2]
         (r4, c4) = vicini[3]
 
-        s = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r3][c3][1] + board.board[r4][c4]
-        score += s if s <= 6 else 0
-        score += 2 if s == 6 else 0
+        somma1 = board.board[r1][c1][1] + board.board[r2][c2][1]
+        somma2 = board.board[r1][c1][1] + board.board[r3][c3][1]
+        somma3 = board.board[r1][c1][1] + board.board[r4][c4][1]
+        somma4 = board.board[r2][c2][1] + board.board[r3][c3][1]
+        somma5 = board.board[r2][c2][1] + board.board[r4][c4][1]
+        somma6 = board.board[r3][c3][1] + board.board[r4][c4][1]
 
-    return score + len(vicini_nemici)
+        somma7 = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r3][c3][1]
+        somma8 = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r4][c4][1]
+        somma9 = board.board[r1][c1][1] + board.board[r3][c3][1] + board.board[r4][c4][1]
+        somma10 = board.board[r2][c2][1] + board.board[r3][c3][1] + board.board[r4][c4][1]
+
+        somma11 = board.board[r1][c1][1] + board.board[r2][c2][1] + board.board[r3][c3][1] + board.board[r4][c4][1]
+
+        score -= 1 if somma1 == 6 else 0
+        score -= 1 if somma2 == 6 else 0
+        score -= 1 if somma3 == 6 else 0
+        score -= 1 if somma4 == 6 else 0
+        score -= 1 if somma5 == 6 else 0
+        score -= 1 if somma6 == 6 else 0
+
+        score -= 1 if somma7 == 6 else 0
+        score -= 1 if somma8 == 6 else 0
+        score -= 1 if somma9 == 6 else 0
+        score -= 1 if somma10 == 6 else 0
+
+        score -= 1 if somma11 == 6 else 0
+
+
+    return score #- len(vicini_nemici)
 
 def evaluate_position(row, col, board, player):
     """Valuta la posizione di un'unità in base alla sua posizione sulla griglia."""
     # Implementa la logica per valutare la posizione
-    score = 0
+
+    player_territory = board.count(player)
+    opponent_territory = sum(1 for row in board.board for cell in row if cell != player)
+
+    centro = 0
+    angolo = 0
+    bordo = 0
+    sei = 0
+    magg_uno = 0
+    vicini_occupati = 0
+    minaccia_player = 0
+    minaccia_avversario = 0
+
+
     vicini = neighbors(row, col, board)
     n_vicini = len(vicini)
+    if row == col == 2: # and player_territory + opponent_territory == 1: # Punteggio molto alto per il centro
+        centro += 1
     if (row, col) in [(0, 0), (0, 4), (4, 0), (4, 4)]:
-        score += 2  # Punteggio alto per gli angoli
+        angolo += 1# Punteggio alto per gli angoli
         if n_vicini == 2:
-            score += 2
-    elif (row, col) in [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 4), (2, 4), (3, 4), (1, 0), (2, 0), (3, 0), (4, 0), (4, 1), (4, 2), (4, 3), (4, 4)]:
-        score += 1  # Punteggio per le posizioni ai bordi
+            vicini_occupati += 1
+    elif (row, col) in [(0, 1), (0, 2), (0, 3), (1, 4), (2, 4), (3, 4), (1, 0), (2, 0), (3, 0), (4, 1), (4, 2), (4, 3)]:
+        bordo += 1  # Punteggio per le posizioni ai bordi
         if n_vicini == 3:
-            score += 3
+            vicini_occupati += 1
     if n_vicini == 4:
-        score += 4
+        vicini_occupati += 1
     if board.board[row][col][1] == 6:
-        score += 3
+        sei += 1.5
+    elif board.board[row][col][1] > 1:
+        magg_uno += 1
 
     for (r, c) in vicini:
         if board.board[r][c][1] == 6:
-            score += 1
+            if board.board[r][c][0] == player:
+                minaccia_player += 1
+            else:
+                minaccia_avversario += 1.5
+        else:
+            if board.board[r][c][0] == player:
+                minaccia_player += 1
+            if board.board[r][c][0] != player:
+                minaccia_avversario += 1
 
-    return score
+    return (
+        2 * centro +
+        2.5 * angolo +
+        1.5 * bordo +
+        4 * sei +
+        1.25 * vicini_occupati +
+        1.5 * magg_uno +
+        1 * minaccia_player -
+        1.25 * minaccia_avversario
+
+    )
 
 def neighbors(row, col, board):
     ret = []
@@ -335,6 +372,10 @@ def neighbors(row, col, board):
     if col + 1 < 5:
         ret.append((row, col + 1)) if board.board[row][col + 1] is not None else None
     return ret
+
+# ______________________________________________________________________________
+# Euristica Colleghi
+
 
 def h1(game, state, player):
     """Euristica avanzata combinata per Cephalopod."""
